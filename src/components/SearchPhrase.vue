@@ -7,14 +7,10 @@
 <script>
 
 export default {
- name: 'SearchPhrase',
- data () {
-   return {
-    // searchText: localStorage.getItem('searchText')
-   }
- },
+ name: 'SearchPhrase', 
  props: ['searchText'],
  computed: {
+   //Кузнецова
  //  searchText () {return localStorage.getItem('searchText')},
    result () {return this.$store.getters.getResult}
  }
