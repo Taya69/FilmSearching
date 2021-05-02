@@ -6,7 +6,8 @@ Vue.use(Vuex)
  let store = new Vuex.Store({
   state: {
     films: [],
-    result: 0    
+    result: 0,
+    loader: false    
    
 },
 getters: {    
@@ -15,6 +16,9 @@ getters: {
     },
     getResult: state => {
         return state.result
+    },
+    getLoader: state => {
+        return state.loader
     }
 },
 mutations: {
@@ -27,8 +31,8 @@ mutations: {
 },
 actions: {   
     async findFilms ({commit}, str) {                   
-         await axios.get(str, {onUploadProgress: (data)=> console.log(data)})
-        .then(response => {commit('setFilms', response.data.Search)});            
+         await axios.get(str, {onDownloadProgress: ()=> this.state.loader = true})
+        .then(response => {setTimeout(()=>{ this.state.loader = false; commit('setFilms', response.data.Search)}, 0)});            
                
     },
     async findResult ({commit}, str) {                   

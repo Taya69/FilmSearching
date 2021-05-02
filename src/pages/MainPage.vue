@@ -7,8 +7,8 @@
     :searchText = 'searchText'
     />
     <result-not-found v-else/>  
-    
-    <films-list/>
+    <spinner v-if="$store.getters.getLoader"/>
+    <films-list v-else/>
     <pagination v-if="$store.getters.getResult > 10"/>
   </div>
 </template>
@@ -19,12 +19,13 @@ import FilmsList from '../components/FilmsList.vue'
 import Pagination from '../components/Pagination.vue'
 import SearchPhrase from '../components/SearchPhrase.vue'
 import ResultNotFound from '../components/ResultNotFound.vue'
+import Spinner from '../components/Spinner.vue'
 
 export default {
   data (){return {
     searchText: ''
   }},
-  components: { MainHeader, FilmsList, Pagination, SearchPhrase, ResultNotFound},
+  components: { MainHeader, FilmsList, Pagination, SearchPhrase, ResultNotFound, Spinner},
   beforeDestroy() {   
     localStorage.removeItem('searchText')
   },

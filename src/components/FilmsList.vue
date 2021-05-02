@@ -1,7 +1,6 @@
 <template>
-  <div class="film-list">
-    <div class="lds-hourglass loader" v-if="loaded"></div>
-    <film-card v-else
+  <div class="film-list">    
+    <film-card
       class="film-card"
       v-for="film in films"
       :key="film.id"
@@ -15,7 +14,7 @@ import FilmCard from './FilmCard'
 export default {
     data() {
             return { 
-              loaded: false         
+                 
             }
         },
   components: { FilmCard },
@@ -23,17 +22,7 @@ export default {
     films () {      
        return this.$store.getters.getFilms
     }
-  },  
-   beforeUpdate() {
-    document.onreadystatechange = () => {
-      if (document.readyState) {this.loaded = true}      
-    }
-  } ,     
-   updated() {
-    document.onreadystatechange = () => {
-      if (document.readyState) {this.loaded = false}
-    }
-  }      
+  },    
 }
 </script>
 
